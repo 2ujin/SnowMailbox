@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import back from "./assets/back.svg";
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -17,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        color: #464646;
+        color: white;
         font-family: 'PyeongChangPeace-Bold';
     }
     
@@ -39,7 +40,6 @@ const GlobalStyle = createGlobalStyle`
     
     input:focus {
         color: black;
-        //input 박스 테두리
         outline: none;
     }
     
@@ -71,6 +71,7 @@ const GlobalStyle = createGlobalStyle`
             -webkit-box-shadow: 0px 0px 22px -2px rgba(0, 0, 0, 0.45);
             -moz-box-shadow: 0px 0px 22px -2px rgba(0, 0, 0, 0.45);
             box-shadow: 0px 0px 22px -2px rgba(0, 0, 0, 0.45);
+            background: url(${back}) center/cover no-repeat;
         }
     
         }
@@ -94,6 +95,7 @@ const GlobalStyle = createGlobalStyle`
             height: 100vh;
             width: 100%;
             margin: 0 auto;
+            background: url(${back}) center/cover no-repeat;
         }
         }
         .Wrapperwidth{
