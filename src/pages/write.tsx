@@ -212,7 +212,7 @@ const Write = () => {
         </ItemWrapper>
 
         <ButtonWrapper>
-          <Button onClick={() => navigate("/write")} name="Next" />
+          <Button onClick={() => navigate("/completed")} name="Next" />
         </ButtonWrapper>
       </Wrapper>
     </>
