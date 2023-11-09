@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift.png";
-import mailbox from "../assets/mailbox.svg";
 import Button from "../components/button";
 
 const Wrapper = styled.div`

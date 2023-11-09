@@ -14,6 +14,7 @@ const Wrapper = styled.div`
 const Mailbox = styled.img`
   width: 280px;
   margin-top: 50px;
+  cursor: pointer;
 `;
 
 const ButtonWrapper = styled.div`
@@ -58,7 +59,7 @@ const Home = () => {
           <Dday>
             <img src={calendar} /> D - 31
           </Dday>
-          <Mailbox src={mailbox} />
+          <Mailbox onClick={() => navigate("/letters")} src={mailbox} />
           <ButtonWrapper>
             <Button onClick={() => navigate("/home")} name="Share my mailbox" />
           </ButtonWrapper>
