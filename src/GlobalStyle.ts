@@ -10,6 +10,17 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 700;
         font-style: normal;
     }
+    @font-face {
+        font-family: 'GmarketSans';
+        font-weight: 700;
+        font-style: normal;
+        src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.eot');
+        src: url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.eot?#iefix') format('embedded-opentype'),
+            url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff2') format('woff2'),
+            url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.woff') format('woff'),
+            url('https://cdn.jsdelivr.net/gh/webfontworld/gmarket/GmarketSansMedium.ttf') format("truetype");
+        font-display: swap;
+    } 
     html {
         height: initial;
     }
@@ -24,14 +35,16 @@ const GlobalStyle = createGlobalStyle`
     
     input {
         width: 100%;
-        border: 1px solid #cdcdcd;
+        border-radius: 14px;
+        background: rgba(25, 48, 19, 0.71);
+        border: none;
         height: 50px;
         padding: 0 20px;
         margin-bottom: 10px;
-        border-radius: 20px;
         font-size: 16px;
         box-sizing: border-box;
-        color: #27282a;
+        color: white;
+        font-family: 'GmarketSans';
     }
 
     a {
@@ -39,7 +52,7 @@ const GlobalStyle = createGlobalStyle`
     }
     
     input:focus {
-        color: black;
+        color: white;
         outline: none;
     }
     
@@ -65,9 +78,9 @@ const GlobalStyle = createGlobalStyle`
         body {
         .wrapper {
             margin: 0 auto;
-            height: 100vh;
+            height: 100%;
             max-width: 480px;
-            padding: 55px 30px;
+            /* padding: 55px 30px; */
             -webkit-box-shadow: 0px 0px 22px -2px rgba(0, 0, 0, 0.45);
             -moz-box-shadow: 0px 0px 22px -2px rgba(0, 0, 0, 0.45);
             box-shadow: 0px 0px 22px -2px rgba(0, 0, 0, 0.45);
