@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift.png";
 import mailbox from "../assets/mailbox.svg";
@@ -148,6 +149,8 @@ const MailboxSvg = ({ color }: any) => {
 };
 
 const Mailbox = () => {
+  const navigate = useNavigate();
+
   const color_list = [
     "#C60000",
     "#730F13",
@@ -221,7 +224,7 @@ const Mailbox = () => {
         </MailboxWrapper>
 
         <ButtonWrapper>
-          <Button name="Next" />
+          <Button onClick={() => navigate("/home")} name="Next" />
         </ButtonWrapper>
       </Wrapper>
     </>

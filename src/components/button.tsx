@@ -1,4 +1,10 @@
+import { MouseEventHandler } from "react";
 import styled from "styled-components";
+
+interface ButtonProps {
+  name: string;
+  onClick?: MouseEventHandler | any;
+}
 
 const ButtonWrapper = styled.div`
   display: flex;
@@ -8,9 +14,11 @@ const ButtonWrapper = styled.div`
   color: #0d4939;
   padding: 15px;
   border-radius: 14px;
+  cursor: pointer;
 `;
-const Button = ({ name }: any) => {
-  return <ButtonWrapper>{name}</ButtonWrapper>;
+
+const Button = ({ name, onClick }: ButtonProps) => {
+  return <ButtonWrapper onClick={onClick}>{name}</ButtonWrapper>;
 };
 
 export default Button;

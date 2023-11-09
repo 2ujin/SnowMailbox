@@ -1,45 +1,48 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import snowman from "../assets/snowman_angle.png";
-import sock from "../assets/sock.png";
+import HomeHeader from "../components/homeHeader";
+import HomeSubHeader from "../components/homeSubHeader";
+import mailbox from "../assets/mailbox.svg";
+import Button from "../components/button";
+import calendar from "../assets/calendar.png";
 
 const Wrapper = styled.div`
   height: 100vh;
-  position: relative;
+  padding: 80px 25px 0px;
 `;
 
-const SnowmanImg = styled.img`
+const Mailbox = styled.img`
   width: 280px;
-  margin-top: 60px;
-`;
-
-const Title = styled.div`
-  font-size: 48px;
-  padding: 0px 40px;
-  margin-top: 40px;
-  line-height: 60px;
-  b {
-    color: #d23039;
-  }
-`;
-
-const SockImg = styled.img`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 120px;
-`;
-
-const LoginBtn = styled.div`
-  padding: 10px;
-  border-radius: 6px;
-  background-color: white;
-  color: #353535;
-  text-align: center;
-  width: 200px;
-  margin-left: 40px;
   margin-top: 50px;
-  cursor: pointer;
+`;
+
+const ButtonWrapper = styled.div`
+  padding-bottom: 50px;
+  margin-top: 20px;
+  width: 100%;
+`;
+
+const MailboxWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 70%;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin-top: 30px;
+`;
+
+const Dday = styled.div`
+  color: #fff;
+  font-size: 36px;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  img {
+    width: 50px;
+    margin-right: 25px;
+  }
 `;
 
 const Home = () => {
@@ -48,12 +51,18 @@ const Home = () => {
   return (
     <>
       <Wrapper>
-        <SnowmanImg src={snowman} />
-        <Title>
-          SNOW <br /> <b>MAILBOX</b>
-        </Title>
-        <LoginBtn onClick={() => navigate("/mailbox")}>Sign Up</LoginBtn>
-        <SockImg src={sock} />
+        <HomeHeader />
+        <HomeSubHeader />
+
+        <MailboxWrapper>
+          <Dday>
+            <img src={calendar} /> D - 31
+          </Dday>
+          <Mailbox src={mailbox} />
+          <ButtonWrapper>
+            <Button onClick={() => navigate("/home")} name="Share my mailbox" />
+          </ButtonWrapper>
+        </MailboxWrapper>
       </Wrapper>
     </>
   );
