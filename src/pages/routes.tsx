@@ -4,6 +4,7 @@ import Home from "./home";
 import Letters from "./letters";
 import Login from "./login";
 import Mailbox from "./mailbox";
+import Write from "./write";
 
 const RoutesComponent = () => {
   return (
@@ -15,6 +16,7 @@ const RoutesComponent = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/letters" element={<Letters />} />
           <Route path="/design" element={<Design />} />
+          <Route path="/write" element={<Write />} />
         </Routes>
       </div>
     </BrowserRouter>

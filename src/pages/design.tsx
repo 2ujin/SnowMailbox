@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift.png";
 import Button from "../components/button";
-import tree from "../assets/stickers/tree.png";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -324,7 +323,7 @@ const Design = () => {
           </ItemWrapper>
 
           <ButtonWrapper>
-            <Button onClick={() => navigate("/home")} name="Next" />
+            <Button onClick={() => navigate("/write")} name="Next" />
           </ButtonWrapper>
         </ScrollWrapper>
       </Wrapper>
