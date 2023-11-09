@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import gift from "../assets/hand_gift.png";
 import mailbox from "../assets/mailbox.svg";
@@ -56,6 +57,10 @@ const Color = styled.div<{ color?: string }>`
   background-color: ${(props) => props.color};
   margin-left: 10px;
   flex-shrink: 0;
+
+  &.is_active {
+    border: 4px solid white;
+  }
 `;
 
 const DecoWrapper = styled.div`
@@ -81,6 +86,10 @@ const Deco = styled.div`
   img {
     width: 50px;
   }
+
+  &.is_active {
+    border: 4px solid #f2b243;
+  }
 `;
 
 const MailboxWrapper = styled.div`
@@ -88,8 +97,9 @@ const MailboxWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  img {
+  position: relative;
+  width: 100%;
+  .img {
     width: 280px;
   }
 `;
@@ -99,14 +109,52 @@ const ButtonWrapper = styled.div`
   margin-top: 20px;
 `;
 
+const DecorationImg = styled.img`
+  width: 70px;
+  position: absolute;
+  top: 30px;
+  left: 54%;
+  transform: translateX(-50%);
+  z-index: 999;
+`;
+
+const MailboxSvg = ({ color }: any) => {
+  return (
+    <svg
+      width="290"
+      height="334"
+      viewBox="0 0 290 334"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M71.5 181.096L40.5 1.09644H250.5C271.5 1.09641 289.5 29.5964 289.5 61.5964V173.074L71.5 181.096Z"
+        fill={color}
+      />
+      <path
+        d="M71.5 181.096L1 168.096L2 44.5963C2.5 24.0963 14 -3.40369 42 1.59629C60.6242 4.92202 72 32.5963 71.5 44.5963V181.096Z"
+        fill={color}
+        stroke="#4D4D4D"
+        stroke-opacity="0.16"
+      />
+      <path d="M138 334V155H165V334H138Z" fill={color} />
+      <path
+        d="M10.4238 54.1357L10.5819 44.137L56.5762 44.8644L56.418 54.8631L10.4238 54.1357Z"
+        fill="#676767"
+        fill-opacity="0.23"
+      />
+    </svg>
+  );
+};
+
 const Mailbox = () => {
   const color_list = [
-    { name: "red", color: "#C60000" },
-    { name: "darkred", color: "#730F13" },
-    { name: "green", color: "#4F8A3D" },
-    { name: "brick", color: "#71372A" },
-    { name: "skyblue", color: "#A2E2F0" },
-    { name: "yellow", color: "#F2B243" },
+    "#C60000",
+    "#730F13",
+    "#4F8A3D",
+    "#71372A",
+    "#A2E2F0",
+    "#F2B243",
   ];
 
   const deco_list = [
@@ -119,6 +167,9 @@ const Mailbox = () => {
     "ginger",
     "sock",
   ];
+
+  const [selectedColor, setSelectedState] = useState(color_list[0]);
+  const [selectedDeco, setDecoState] = useState(deco_list[0]);
 
   return (
     <>
@@ -136,8 +187,13 @@ const Mailbox = () => {
         <ItemWrapper>
           <span>Color</span>
           <ColorWrapper>
-            {color_list.map((item, index) => (
-              <Color color={item.color} key={index}></Color>
+            {color_list.map((color, index) => (
+              <Color
+                className={color === selectedColor ? "is_active" : ""}
+                onClick={() => setSelectedState(color)}
+                color={color}
+                key={index}
+              ></Color>
             ))}
           </ColorWrapper>
         </ItemWrapper>
@@ -146,7 +202,11 @@ const Mailbox = () => {
           <span>Decorations</span>
           <DecoWrapper>
             {deco_list.map((name, index) => (
-              <Deco key={index}>
+              <Deco
+                key={index}
+                onClick={() => setDecoState(name)}
+                className={name === selectedDeco ? "is_active" : ""}
+              >
                 <img src={require(`../assets/decorations/${name}.png`)} />
               </Deco>
             ))}
@@ -154,7 +214,10 @@ const Mailbox = () => {
         </ItemWrapper>
 
         <MailboxWrapper>
-          <img src={mailbox} />
+          <DecorationImg
+            src={require(`../assets/decorations/${selectedDeco}.png`)}
+          />
+          <MailboxSvg className="name" color={selectedColor} />
         </MailboxWrapper>
 
         <ButtonWrapper>
