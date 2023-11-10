@@ -21,6 +21,11 @@ const getMailbox = () => {
   return http.get("/mailbox", { headers });
 };
 
+const getMailboxbyId = (id: string) => {
+  return http.get(`/mailbox/${id}`);
+};
+
+
 const checkTocken = () => {
   const token = localStorage.getItem("token");
   return { Authorization: `Bearer ${token}` };
@@ -31,6 +36,7 @@ const ApiService = {
   login,
   createMailbox,
   getMailbox,
+  getMailboxbyId,
 };
 
 export default ApiService;

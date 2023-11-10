@@ -40,4 +40,9 @@ export class MailboxController {
     });
     return await this.mailboxController.getMailbox(find_user._id);
   }
+
+  @Get('/:id')
+  async getMailboxById(@Param('id') id: string): Promise<Mailbox> {
+    return await this.mailboxController.getMailboxById(id);
+  }
 }

@@ -16,6 +16,10 @@ const HeaderWrapper = styled.div`
   b {
     color: #d23039;
   }
+
+  &.center {
+    text-align: center;
+  }
 `;
 
 const SantaWrapper = styled.div`
@@ -37,12 +41,22 @@ const SantaWrapper = styled.div`
   }
 `;
 
-const HomeHeader = () => {
+const HomeHeader = ({ name, isMyMailbox }: any) => {
   return (
     <Wrapper>
-      <HeaderWrapper>
-        You got <br />
-        <b>3</b> letters received!
+      <HeaderWrapper className={!isMyMailbox ? "center" : ""}>
+        {isMyMailbox ? (
+          <>
+            Hello! {name} :)
+            <br />
+            <b>3</b> letters received!
+          </>
+        ) : (
+          <>
+            Welcome to <br />
+            Jin's <b> Mailbox</b>
+          </>
+        )}
       </HeaderWrapper>
       <SantaWrapper>
         <img src={santa} />
