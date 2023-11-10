@@ -148,7 +148,10 @@ const Home = () => {
 
           {/* <Mailbox  src={mailbox} /> */}
           <ButtonWrapper>
-            <Button onClick={() => navigate("/home")} name="Share my mailbox" />
+            <Button
+              onClick={() => navigate("/home")}
+              name={isMyMailbox ? "Share my Mailbox 📮" : "Write a Letter 💌"}
+            />
           </ButtonWrapper>
         </MailboxWrapper>
       </Wrapper>
