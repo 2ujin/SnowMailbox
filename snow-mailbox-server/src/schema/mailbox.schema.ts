@@ -2,23 +2,20 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 
 @Schema()
-export class Users {
+export class Mailbox {
   _id: mongoose.Types.ObjectId;
 
   @Prop()
   name: string;
 
   @Prop()
-  email: string;
+  user_id: string;
 
   @Prop()
-  locale: string;
+  mailbox_color: string;
 
   @Prop()
-  sub: string;
-
-  @Prop()
-  nickname: string;
+  mailbox_decorations: string;
 }
 
-export const UsersSchema = SchemaFactory.createForClass(Users);
+export const MailboxSchema = SchemaFactory.createForClass(Mailbox);

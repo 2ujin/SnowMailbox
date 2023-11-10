@@ -1,10 +1,8 @@
 import http from "../http-common";
-import IUsers from "../types/Users";
+import { IMailbox, IUsers } from "../types/Users";
 
 const token = localStorage.getItem("token");
 const headers = { Authorization: `Bearer ${token}` };
-
-
 
 const login = (body: IUsers) => {
   return http.post("/auth/login", body);
@@ -14,9 +12,14 @@ const getUser = () => {
   return http.get("/user", { headers });
 };
 
-const UserService = {
-  getUser,
-  login,
+const createMailbox = (data: IMailbox) => {
+  return http.post("/mailbox", data, { headers });
 };
 
-export default UserService;
+const ApiService = {
+  getUser,
+  login,
+  createMailbox,
+};
+
+export default ApiService;

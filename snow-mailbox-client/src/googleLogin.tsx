@@ -2,7 +2,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import UserService from "./services/userService";
+import ApiService from "./services/apiService";
 import IUsers from "./types/Users";
 const GoogleLoginButton = () => {
   const clientId =
@@ -13,12 +13,12 @@ const GoogleLoginButton = () => {
   const googleLoginSuccess = (res: any) => {
     const decoded: IUsers = jwtDecode(res.credential);
     const { name, email, locale, sub, nickname } = decoded;
-    UserService.login({ name, email, locale, sub, nickname })
+    ApiService.login({ name, email, locale, sub, nickname })
       .then(async (response: any) => {
         const token = response.data.token;
         if (token) {
           localStorage.setItem("token", token);
-          const user = await UserService.getUser();
+          const user = await ApiService.getUser();
           if (user) {
             localStorage.setItem("user", JSON.stringify(user));
           }

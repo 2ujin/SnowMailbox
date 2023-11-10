@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift.png";
 import Button from "../components/button";
+import ApiService from "../services/apiService";
+import { IMailbox } from "../types/Users";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -149,7 +151,6 @@ const MailboxSvg = ({ color }: any) => {
 
 const Mailbox = () => {
   const navigate = useNavigate();
-
   const color_list = [
     "#C60000",
     "#730F13",
@@ -170,8 +171,27 @@ const Mailbox = () => {
     "sock",
   ];
 
+  const [inputValue, setInputValue] = useState("");
   const [selectedColor, setSelectedState] = useState(color_list[0]);
   const [selectedDeco, setDecoState] = useState(deco_list[0]);
+
+  const handleSubmit = async () => {
+    if (!inputValue) {
+      alert("Please fill name!");
+    }
+
+    const create: IMailbox = {
+      name: inputValue,
+      mailbox_color: selectedColor,
+      mailbox_decorations: selectedDeco,
+    };
+
+    await ApiService.createMailbox(create)
+      .then((response) => {
+        navigate(`/home/${response.data}`);
+      })
+      .catch((err) => alert("Something Wrong 😅" + JSON.stringify(err)));
+  };
 
   return (
     <>
@@ -183,7 +203,12 @@ const Mailbox = () => {
 
         <ItemWrapper>
           <span>Name</span>
-          <input type="text" />
+          <input
+            maxLength={10}
+            type="text"
+            value={inputValue}
+            onChange={(event) => setInputValue(event.target.value)}
+          />
         </ItemWrapper>
 
         <ItemWrapper>
@@ -223,7 +248,7 @@ const Mailbox = () => {
         </MailboxWrapper>
 
         <ButtonWrapper>
-          <Button onClick={() => navigate("/home")} name="Next" />
+          <Button onClick={handleSubmit} name="Next" />
         </ButtonWrapper>
       </Wrapper>
     </>
