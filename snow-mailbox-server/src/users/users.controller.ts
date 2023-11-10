@@ -5,12 +5,15 @@ import { UsersService } from './users.service';
 
 @Controller('user')
 export class UserssController {
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly jwtService: JwtService,
+    private userService: UsersService,
+  ) {}
 
   @Get()
   async findUserOne(
     @Headers('authorization') authorizationHeader: string,
-  ): Promise<Users[]> {
+  ): Promise<Users> {
     const token = authorizationHeader?.replace('Bearer ', '');
 
     if (!token) {
@@ -19,7 +22,8 @@ export class UserssController {
 
     try {
       // JWT decode
-      return this.jwtService.verifyToken(token);
+      const user = await this.jwtService.verifyToken(token);
+      return await this.userService.findUserOne(user);
     } catch (error) {
       throw error;
     }

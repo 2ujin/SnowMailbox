@@ -28,4 +28,16 @@ export class MailboxController {
     requestBody.user_id = String(find_user._id);
     return await this.mailboxController.createMailbox(requestBody);
   }
+
+  @Get()
+  async getMailbox(
+    @Headers('authorization') authorizationHeader: string,
+  ): Promise<Mailbox> {
+    const token = authorizationHeader?.replace('Bearer ', '');
+    const user = this.jwtService.verifyToken(token);
+    const find_user = await this.usersModel.findOne({
+      sub: user.sub,
+    });
+    return await this.mailboxController.getMailbox(find_user._id);
+  }
 }

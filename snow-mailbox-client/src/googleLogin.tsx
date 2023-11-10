@@ -22,7 +22,13 @@ const GoogleLoginButton = () => {
           if (user) {
             localStorage.setItem("user", JSON.stringify(user));
           }
-          navigate("/mailbox");
+          const is_mailbox = await ApiService.getMailbox();
+          if (is_mailbox.data) {
+            navigate(`/${is_mailbox.data._id}`);
+          } else {
+            navigate("/mailbox");
+          }
+
         }
       })
       .catch((e: Error) => {
