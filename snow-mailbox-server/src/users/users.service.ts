@@ -9,10 +9,6 @@ export class UsersService {
     @InjectModel(Users.name) private readonly usersModel: Model<Users>,
   ) {}
 
-  async findAll(): Promise<Users[]> {
-    return this.usersModel.find().exec();
-  }
-
   async login(data: Users): Promise<Users> {
     let user: Users = await this.usersModel
       .findOne({
@@ -25,5 +21,13 @@ export class UsersService {
     }
 
     return await this.usersModel.create(data);
+  }
+
+  async findUserOne(user): Promise<Users> {
+    return this.usersModel
+      .findOne({
+        sub: user.sub,
+      })
+      .exec();
   }
 }

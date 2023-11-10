@@ -10,8 +10,14 @@ export class MailboxService {
     @InjectModel(Mailbox.name) private readonly mailboxModel: Model<Mailbox>,
   ) {}
 
-  async createMailbox(@Body() requestBody: Mailbox): Promise<String> {
+  async createMailbox(requestBody: Mailbox): Promise<String> {
     const create: any = await this.mailboxModel.create(requestBody);
     return create._id;
+  }
+
+  async getMailbox(user_id): Promise<Mailbox> {
+    return await this.mailboxModel.findOne({
+      user_id,
+    });
   }
 }
