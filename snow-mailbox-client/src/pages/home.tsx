@@ -2,22 +2,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import HomeHeader from "../components/homeHeader";
 import HomeSubHeader from "../components/homeSubHeader";
-import mailbox from "../assets/mailbox.svg";
 import Button from "../components/button";
 import calendar from "../assets/calendar.png";
 import ApiService from "../services/apiService";
 import { useState, useEffect } from "react";
 import { IMailbox } from "../types/Users";
+import moment from "moment";
 
 const Wrapper = styled.div`
   height: 100vh;
   padding: 80px 25px 0px;
-`;
-
-const Mailbox = styled.img`
-  width: 280px;
-  margin-top: 50px;
-  cursor: pointer;
 `;
 
 const ButtonWrapper = styled.div`
@@ -104,10 +98,14 @@ const Home = () => {
   let user: any = localStorage.getItem("user");
   user = JSON.parse(user);
 
+  const today = moment().format("YYYY-MM-DD");
+  const christmas = moment("2023-12-25");
+  const dday = christmas.diff(today, "days");
+
   const getTutorial = (id: string) => {
     ApiService.getMailboxbyId(id)
       .then((response: any) => {
-        setData(response.data);
+        if (response.data) setData(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -135,7 +133,7 @@ const Home = () => {
 
         <MailboxWrapper>
           <Dday>
-            <img src={calendar} /> D - 31
+            <img src={calendar} /> D - {dday}
           </Dday>
           <DecorationImg
             src={require(`../assets/decorations/${data.mailbox_decorations}.png`)}
