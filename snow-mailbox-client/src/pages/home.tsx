@@ -112,6 +112,20 @@ const Home = () => {
       });
   };
 
+  const handleButtonClick = () => {
+    if (isMyMailbox) {
+      const currentUrl = window.location.href;
+      const textArea = document.createElement("textarea");
+      textArea.value = currentUrl;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+    } else {
+      navigate("/design");
+    }
+  };
+
   useEffect(() => {
     if (id) getTutorial(id);
   }, [id]);
@@ -135,9 +149,13 @@ const Home = () => {
           <Dday>
             <img src={calendar} /> D - {dday}
           </Dday>
-          <DecorationImg
-            src={require(`../assets/decorations/${data.mailbox_decorations}.png`)}
-          />
+          {data.mailbox_decorations ? (
+            <DecorationImg
+              src={require(`../assets/decorations/${data.mailbox_decorations}.png`)}
+            />
+          ) : (
+            <></>
+          )}
           <MailboxSvg
             onClick={() => navigate("/letters")}
             className="name"
@@ -147,7 +165,7 @@ const Home = () => {
           {/* <Mailbox  src={mailbox} /> */}
           <ButtonWrapper>
             <Button
-              onClick={() => navigate("/home")}
+              onClick={handleButtonClick}
               name={isMyMailbox ? "Share my Mailbox 📮" : "Write a Letter 💌"}
             />
           </ButtonWrapper>
