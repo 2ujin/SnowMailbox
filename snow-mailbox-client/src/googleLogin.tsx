@@ -3,7 +3,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import ApiService from "./services/apiService";
-import IUsers from "./types/Users";
+import { IUsers } from "./types/Users";
 const GoogleLoginButton = () => {
   const clientId =
     "705147682536-svudhbtvg80n9d11nbnt6pirgkfrtjq1.apps.googleusercontent.com";
