@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import snowman from "../assets/snowman_angle.png";
 import sock from "../assets/sock.png";
+import GoogleLoginButton from "../googleLogin";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -31,10 +32,6 @@ const SockImg = styled.img`
 `;
 
 const LoginBtn = styled.div`
-  padding: 10px;
-  border-radius: 6px;
-  background-color: white;
-  color: #353535;
   text-align: center;
   width: 200px;
   margin-left: 40px;
@@ -52,7 +49,9 @@ const Login = () => {
         <Title>
           SNOW <br /> <b>MAILBOX</b>
         </Title>
-        <LoginBtn onClick={() => navigate("/mailbox")}>Sign Up</LoginBtn>
+        <LoginBtn>
+          <GoogleLoginButton />
+        </LoginBtn>
         <SockImg src={sock} />
       </Wrapper>
     </>
