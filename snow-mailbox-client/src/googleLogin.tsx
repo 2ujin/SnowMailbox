@@ -20,7 +20,7 @@ const GoogleLoginButton = () => {
           localStorage.setItem("token", token);
           const user = await ApiService.getUser();
           if (user) {
-            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("user", JSON.stringify(user.data));
           }
           const is_mailbox = await ApiService.getMailbox();
           if (is_mailbox.data) {

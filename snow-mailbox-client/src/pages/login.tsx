@@ -40,8 +40,6 @@ const LoginBtn = styled.div`
 `;
 
 const Login = () => {
-  const navigate = useNavigate();
-
   return (
     <>
       <Wrapper>

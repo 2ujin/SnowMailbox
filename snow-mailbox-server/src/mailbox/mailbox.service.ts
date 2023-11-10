@@ -20,4 +20,10 @@ export class MailboxService {
       user_id,
     });
   }
+
+  async getMailboxById(_id): Promise<Mailbox> {
+    return await this.mailboxModel.findOne({
+      _id,
+    });
+  }
 }

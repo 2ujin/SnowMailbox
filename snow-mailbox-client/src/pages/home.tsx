@@ -1,10 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import HomeHeader from "../components/homeHeader";
 import HomeSubHeader from "../components/homeSubHeader";
 import mailbox from "../assets/mailbox.svg";
 import Button from "../components/button";
 import calendar from "../assets/calendar.png";
+import ApiService from "../services/apiService";
+import { useState, useEffect } from "react";
+import { IMailbox } from "../types/Users";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -47,13 +50,49 @@ const Dday = styled.div`
 `;
 
 const Home = () => {
+  const initialTutorialState = {
+    id: "",
+    name: "",
+    user_id: "",
+    mailbox_color: "",
+    mailbox_decorations: "",
+  };
+
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [data, setData] = useState<IMailbox>(initialTutorialState);
+  const [isMyMailbox, setIsMyMailbox] = useState(false);
+  let user: any = localStorage.getItem("user");
+  user = JSON.parse(user);
+
+  const getTutorial = (id: string) => {
+    ApiService.getMailboxbyId(id)
+      .then((response: any) => {
+        setData(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    if (id) getTutorial(id);
+  }, [id]);
+
+  useEffect(() => {
+    if (data.user_id === user?._id) {
+      setIsMyMailbox(true);
+    }
+  }, [data, user]);
 
   return (
     <>
       <Wrapper>
-        <HomeHeader />
-        <HomeSubHeader />
+        <HomeHeader
+          isMyMailbox={isMyMailbox}
+          name={isMyMailbox ? data.name : "하위"}
+        />
+        <HomeSubHeader isMyMailbox={isMyMailbox} />
 
         <MailboxWrapper>
           <Dday>

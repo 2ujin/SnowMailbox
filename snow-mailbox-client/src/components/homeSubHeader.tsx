@@ -18,6 +18,10 @@ const HeaderWrapper = styled.div`
   b {
     color: #d23039;
   }
+
+  &.center {
+    text-align: center;
+  }
 `;
 
 const SantaWrapper = styled.div`
@@ -37,12 +41,21 @@ const SantaWrapper = styled.div`
   }
 `;
 
-const HomeSubHeader = () => {
+const HomeSubHeader = ({ isMyMailbox }: any) => {
   return (
     <Wrapper>
-      <HeaderWrapper>
-        You can read the received message <br />
-        <b> on December 25th</b>
+      <HeaderWrapper className={!isMyMailbox ? "center" : ""}>
+        {isMyMailbox ? (
+          <>
+            You can read the received message <br />
+            <b> on December 25th</b>
+          </>
+        ) : (
+          <>
+            You can send an exciting <br />
+            <b>Christmas letter!</b>
+          </>
+        )}
       </HeaderWrapper>
       <SantaWrapper>
         <img src={snowman} />
