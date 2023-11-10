@@ -12,4 +12,18 @@ export class UsersService {
   async findAll(): Promise<Users[]> {
     return this.usersModel.find().exec();
   }
+
+  async login(data: Users): Promise<Users> {
+    let user: Users = await this.usersModel
+      .findOne({
+        sub: data.sub,
+      })
+      .exec();
+
+    if (user) {
+      return user;
+    }
+
+    return await this.usersModel.create(data);
+  }
 }
