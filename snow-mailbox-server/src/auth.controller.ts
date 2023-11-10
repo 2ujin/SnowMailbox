@@ -18,7 +18,9 @@ export class AuthController {
     if (user) {
       const token = this.jwtService.generateToken({
         sub: user.sub,
-        username: user.name,
+        name: user.name,
+        email: user.email,
+        nickname: user.nickname,
       });
       return { token };
     } else {

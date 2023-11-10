@@ -14,10 +14,14 @@ const GoogleLoginButton = () => {
     const decoded: IUsers = jwtDecode(res.credential);
     const { name, email, locale, sub, nickname } = decoded;
     UserService.login({ name, email, locale, sub, nickname })
-      .then((response: any) => {
+      .then(async (response: any) => {
         const token = response.data.token;
         if (token) {
           localStorage.setItem("token", token);
+          const user = await UserService.getUser();
+          if (user) {
+            localStorage.setItem("user", JSON.stringify(user));
+          }
           navigate("/mailbox");
         }
       })

@@ -5,16 +5,17 @@ const token = localStorage.getItem("token");
 const headers = { Authorization: `Bearer ${token}` };
 
 
-const get = () => {
-  return http.get("");
-};
 
 const login = (body: IUsers) => {
   return http.post("/auth/login", body);
 };
 
+const getUser = () => {
+  return http.get("/user", { headers });
+};
+
 const UserService = {
-  get,
+  getUser,
   login,
 };
 
