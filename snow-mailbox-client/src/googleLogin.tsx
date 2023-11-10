@@ -24,7 +24,7 @@ const GoogleLoginButton = () => {
           }
           const is_mailbox = await ApiService.getMailbox();
           if (is_mailbox.data) {
-            navigate("/home");
+            navigate(`/${is_mailbox.data._id}`);
           } else {
             navigate("/mailbox");
           }

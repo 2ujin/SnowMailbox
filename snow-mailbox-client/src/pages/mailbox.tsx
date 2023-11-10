@@ -188,7 +188,7 @@ const Mailbox = () => {
 
     await ApiService.createMailbox(create)
       .then((response) => {
-        navigate(`/home/${response.data}`);
+        navigate(`/${response.data}`);
       })
       .catch((err) => alert("Something Wrong 😅" + JSON.stringify(err)));
   };
