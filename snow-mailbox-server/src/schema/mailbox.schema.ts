@@ -8,7 +8,7 @@ export class Mailbox {
   @Prop()
   name: string;
 
-  @Prop()
+  @Prop({ type: String, unique: true })
   user_id: string;
 
   @Prop()
