@@ -10,9 +10,4 @@ export class UserssController {
   async findAll(): Promise<Users[]> {
     return this.users_service.findAll();
   }
-
-  @Post('/login')
-  async login(@Body() requestBody: any): Promise<Users> {
-    return this.users_service.login(requestBody);
-  }
 }

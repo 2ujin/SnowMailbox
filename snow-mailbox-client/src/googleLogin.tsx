@@ -15,7 +15,9 @@ const GoogleLoginButton = () => {
     const { name, email, locale, sub, nickname } = decoded;
     UserService.login({ name, email, locale, sub, nickname })
       .then((response: any) => {
-        if (response.data) {
+        const token = response.data.token;
+        if (token) {
+          localStorage.setItem("token", token);
           navigate("/mailbox");
         }
       })
