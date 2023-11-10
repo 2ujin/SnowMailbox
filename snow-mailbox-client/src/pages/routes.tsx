@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Completed from "./completed";
 import Design from "./design";
 import Home from "./home";
@@ -8,12 +8,25 @@ import Mailbox from "./mailbox";
 import Write from "./write";
 
 const RoutesComponent = () => {
+  const token = localStorage.getItem("token");
+
   return (
     <BrowserRouter>
       <div className="wrapper">
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/mailbox" element={<Mailbox />} />
+          {token ? (
+            <>
+              <Route path="/mailbox" element={<Mailbox />} />
+              <Route path="/letters" element={<Letters />} />
+            </>
+          ) : (
+            <>
+              <Route path="/mailbox" element={<Navigate to="/" />} />
+              <Route path="/letters" element={<Navigate to="/" />} />
+            </>
+          )}
+
           <Route path="/home" element={<Home />} />
           <Route path="/letters" element={<Letters />} />
           <Route path="/design" element={<Design />} />
