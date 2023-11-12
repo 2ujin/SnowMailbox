@@ -18,7 +18,7 @@ const RoutesComponent = () => {
           {token ? (
             <>
               <Route path="/mailbox" element={<Mailbox />} />
-              <Route path="/letters" element={<Letters />} />
+              <Route path="/letters/:id" element={<Letters />} />
             </>
           ) : (
             <>
@@ -26,7 +26,6 @@ const RoutesComponent = () => {
               <Route path="/letters" element={<Navigate to="/" />} />
             </>
           )}
-
           <Route path="/:id" element={<Home />} />
           <Route path="/letters" element={<Letters />} />
           <Route path="/design/:id" element={<Design />} />

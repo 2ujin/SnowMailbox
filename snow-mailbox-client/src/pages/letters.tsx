@@ -1,6 +1,11 @@
+import { resolve } from "path";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift_a.png";
 import letter from "../assets/letter.png";
+import ApiService from "../services/apiService";
+import { ICard } from "../types/Users";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -23,22 +28,88 @@ const Gift = styled.img`
   right: 30px;
 `;
 
-const LetterImg = styled.img`
+const Card = styled.div<{ color?: string }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: ${(props) => props.color};
   width: 100%;
-  margin-bottom: 10px;
+  height: 270px;
+  padding: 21px;
+  margin-bottom: 15px;
+  .card-text {
+    font-family: "EF_jejudoldam";
+    color: white;
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    img {
+      width: 30px;
+      margin-right: 10px;
+    }
+  }
+  .sticker {
+    width: 140px;
+    margin-top: 25px;
+
+    &.tree {
+      width: 70px;
+    }
+
+    &.small {
+      width: 100px;
+    }
+  }
 `;
 
 const Letters = () => {
-  const temp = [0, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2];
+  const { id } = useParams();
+  const [cards, setCards] = useState<ICard[]>([]);
+
+  const getMailboxbyId = (id: string) => {
+    ApiService.getCardByUser(id)
+      .then((response: any) => {
+        if (response.data) setCards(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
+  useEffect(() => {
+    if (id) getMailboxbyId(id);
+  }, [id]);
+
   return (
     <>
       <Wrapper>
         <Title>Received </Title>
         <Gift src={gift} />
 
-        {temp.map((_) => (
-          <LetterImg src={letter} />
-        ))}
+        {cards.length > 0 &&
+          cards.map((card) => (
+            <Card color={card.card_color}>
+              <div className="card-text">
+                <img
+                  src={require(`../assets/decorations/${card.card_deco}.png`)}
+                />
+                {card.card_text}
+              </div>
+              <img
+                className={`sticker ${
+                  card.card_sticker === "tree"
+                    ? "tree"
+                    : card.card_sticker === "santa_glasses" ||
+                      card.card_sticker === "santa2" ||
+                      card.card_sticker === "santa5"
+                    ? "small"
+                    : ""
+                }`}
+                src={require(`../assets/stickers/${card.card_sticker}.png`)}
+              />
+            </Card>
+          ))}
       </Wrapper>
     </>
   );

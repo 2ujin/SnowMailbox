@@ -33,6 +33,11 @@ export class LetterController {
     return this.letterService.selectCard(id);
   }
 
+  @Get('/cards/:id')
+  async selectCardByUser(@Param('id') user_id: string): Promise<Card[]> {
+    return this.letterService.selectCardByUser(user_id);
+  }
+
   @Post()
   async writeLetter(@Body() requestBody: Letters): Promise<Letters> {
     return this.letterService.writeLetter(requestBody);
