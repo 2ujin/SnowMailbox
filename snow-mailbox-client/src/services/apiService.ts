@@ -1,5 +1,5 @@
 import http from "../http-common";
-import { IMailbox, IUsers } from "../types/Users";
+import { ICard, IMailbox, IUsers } from "../types/Users";
 
 const login = (body: IUsers) => {
   return http.post("/auth/login", body);
@@ -7,7 +7,6 @@ const login = (body: IUsers) => {
 
 const getUser = () => {
   const headers = checkTocken();
-
   return http.get("/user", { headers });
 };
 
@@ -25,6 +24,13 @@ const getMailboxbyId = (id: string) => {
   return http.get(`/mailbox/${id}`);
 };
 
+const createCard = (data: ICard) => {
+  return http.post("/letter/card", data);
+};
+
+const writeLetter = (data: any, headers?: any) => {
+  return http.post("/letter", data, headers);
+};
 
 const checkTocken = () => {
   const token = localStorage.getItem("token");
@@ -37,6 +43,8 @@ const ApiService = {
   createMailbox,
   getMailbox,
   getMailboxbyId,
+  createCard,
+  writeLetter,
 };
 
 export default ApiService;

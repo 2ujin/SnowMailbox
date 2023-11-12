@@ -29,8 +29,8 @@ const RoutesComponent = () => {
 
           <Route path="/:id" element={<Home />} />
           <Route path="/letters" element={<Letters />} />
-          <Route path="/design" element={<Design />} />
-          <Route path="/write" element={<Write />} />
+          <Route path="/design/:id" element={<Design />} />
+          <Route path="/write/:id" element={<Write />} />
           <Route path="/completed" element={<Completed />} />
         </Routes>
       </div>

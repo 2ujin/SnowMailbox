@@ -1,8 +1,11 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift.png";
 import Button from "../components/button";
+import html2canvas from "html2canvas";
+import ApiService from "../services/apiService";
+import saveAs from "file-saver";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -187,7 +190,8 @@ const ScrollWrapper = styled.div`
 `;
 
 const Design = () => {
-  const navigate = useNavigate();
+  const { id } = useParams();
+
   const stickers_list = [
     "gift",
     "ginger",
@@ -234,6 +238,19 @@ const Design = () => {
   const [selectedSticker, setStickerState] = useState(stickers_list[0]);
   const [selectedDeco, setDecoState] = useState(deco_list[0]);
   const [selectedText, setTextState] = useState(text_list[0]);
+
+  const navigate = useNavigate();
+
+  const handleSaveImage = async () => {
+    await ApiService.createCard({
+      card_color: selectedColor,
+      card_sticker: selectedSticker,
+      card_deco: selectedDeco,
+      card_text: selectedText,
+    }).then((response) => {
+      navigate(`/write/${response.data}`);
+    });
+  };
 
   return (
     <>
@@ -323,7 +340,7 @@ const Design = () => {
           </ItemWrapper>
 
           <ButtonWrapper>
-            <Button onClick={() => navigate("/write")} name="Next" />
+            <Button onClick={handleSaveImage} name="Next" />
           </ButtonWrapper>
         </ScrollWrapper>
       </Wrapper>

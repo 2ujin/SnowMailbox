@@ -14,3 +14,12 @@ export interface IMailbox {
   mailbox_color?: string;
   mailbox_decorations?: string;
 }
+
+
+export interface ICard {
+  id?: any | null;
+  card_color: string;
+  card_sticker: string;
+  card_deco: string;
+  card_text: string;
+}

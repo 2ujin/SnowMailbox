@@ -9,7 +9,7 @@ import { MailboxService } from './mailbox.service';
 @Controller('mailbox')
 export class MailboxController {
   constructor(
-    private mailboxController: MailboxService,
+    private mailboxService: MailboxService,
     private readonly jwtService: JwtService,
     @InjectModel(Users.name) private readonly usersModel: Model<Users>,
   ) {}
@@ -26,7 +26,7 @@ export class MailboxController {
       sub: user.sub,
     });
     requestBody.user_id = String(find_user._id);
-    return await this.mailboxController.createMailbox(requestBody);
+    return await this.mailboxService.createMailbox(requestBody);
   }
 
   @Get()
@@ -38,11 +38,11 @@ export class MailboxController {
     const find_user = await this.usersModel.findOne({
       sub: user.sub,
     });
-    return await this.mailboxController.getMailbox(find_user._id);
+    return await this.mailboxService.getMailbox(find_user._id);
   }
 
   @Get('/:id')
   async getMailboxById(@Param('id') id: string): Promise<Mailbox> {
-    return await this.mailboxController.getMailboxById(id);
+    return await this.mailboxService.getMailboxById(id);
   }
 }
