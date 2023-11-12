@@ -1,9 +1,11 @@
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift.png";
 import Button from "../components/button";
 import html2canvas from "html2canvas";
+import ApiService from "../services/apiService";
+import saveAs from "file-saver";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -188,8 +190,7 @@ const ScrollWrapper = styled.div`
 `;
 
 const Design = () => {
-  const navigate = useNavigate();
-  const designRef = useRef(null);
+  const { id } = useParams();
 
   const stickers_list = [
     "gift",
@@ -238,13 +239,17 @@ const Design = () => {
   const [selectedDeco, setDecoState] = useState(deco_list[0]);
   const [selectedText, setTextState] = useState(text_list[0]);
 
-  const handleSaveImage = () => {
-    if (designRef.current) {
-      html2canvas(designRef.current).then((canvas: any) => {
-        const imgData = canvas.toDataURL("image/png");
-        console.log(imgData);
-      });
-    }
+  const navigate = useNavigate();
+
+  const handleSaveImage = async () => {
+    await ApiService.createCard({
+      card_color: selectedColor,
+      card_sticker: selectedSticker,
+      card_deco: selectedDeco,
+      card_text: selectedText,
+    }).then((response) => {
+      navigate(`/write/${response.data}`);
+    });
   };
 
   return (
@@ -254,7 +259,7 @@ const Design = () => {
           Design <br /> <b>Christmas card!</b>
         </Title>
         <GiftImg src={gift} />
-        <Card ref={designRef} color={selectedColor}>
+        <Card color={selectedColor}>
           <div className="card-text">
             <img src={require(`../assets/decorations/${selectedDeco}.png`)} />
             {selectedText}

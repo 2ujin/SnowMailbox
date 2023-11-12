@@ -125,7 +125,7 @@ const Home = () => {
         "Your url has been copied. Share with your friends to receive letters! 💌😉"
       );
     } else {
-      navigate("/design");
+      navigate(`/design/${data.user_id}`);
     }
   };
 
