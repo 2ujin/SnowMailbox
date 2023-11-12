@@ -12,7 +12,7 @@ import { LetterService } from './letter.service';
   imports: [
     MongooseModule.forFeature([
       { name: Letters.name, schema: LettersSchema },
-      { name: Users.name, schema: UsersSchema },
+      { name: Mailbox.name, schema: MailboxSchema },
       { name: Card.name, schema: CardSchema },
     ]),
     MulterModule.register({

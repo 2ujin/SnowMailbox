@@ -16,6 +16,9 @@ export class Letters {
 
   @Prop()
   letter: string;
+
+  @Prop()
+  poststamp: string;
 }
 
 export const LettersSchema = SchemaFactory.createForClass(Letters);

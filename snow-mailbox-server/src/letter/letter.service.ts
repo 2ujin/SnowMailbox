@@ -3,12 +3,15 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Card } from 'src/schema/card.schema';
 import { Letters } from 'src/schema/letter.schema';
+import { Mailbox } from 'src/schema/mailbox.schema';
+import { Users } from 'src/schema/users.schema';
 
 @Injectable()
 export class LetterService {
   constructor(
     @InjectModel(Letters.name) private readonly letterModel: Model<Letters>,
     @InjectModel(Card.name) private readonly cardModel: Model<Card>,
+    @InjectModel(Mailbox.name) private readonly mailboxModel: Model<Mailbox>,
   ) {}
 
   async createCard(requestBody: Card): Promise<String> {
@@ -17,13 +20,16 @@ export class LetterService {
   }
 
   async selectCard(_id: string): Promise<Card> {
-    return await this.cardModel.findOne({
+    const card = await this.cardModel.findOne({
       _id,
     });
+
+    const user = await this.mailboxModel.findOne({ user_id: card.to_user_id });
+    card.to_user_name = user.name;
+    return card;
   }
 
-  async writeLetter(requestBody: Letters): Promise<String> {
-    console.log(requestBody);
-    return '';
+  async writeLetter(requestBody: Letters): Promise<Letters> {
+    return await this.letterModel.create(requestBody);
   }
 }

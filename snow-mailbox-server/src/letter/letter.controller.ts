@@ -21,10 +21,7 @@ import { Card } from 'src/schema/card.schema';
 
 @Controller('letter')
 export class LetterController {
-  constructor(
-    private letterService: LetterService,
-    @InjectModel(Users.name) private readonly usersModel: Model<Users>,
-  ) {}
+  constructor(private letterService: LetterService) {}
 
   @Post('/card')
   async createCard(@Body() requestBody: Card): Promise<String> {
@@ -34,5 +31,10 @@ export class LetterController {
   @Get('/card/:id')
   async selectCard(@Param('id') id: string): Promise<Card> {
     return this.letterService.selectCard(id);
+  }
+
+  @Post()
+  async writeLetter(@Body() requestBody: Letters): Promise<Letters> {
+    return this.letterService.writeLetter(requestBody);
   }
 }
