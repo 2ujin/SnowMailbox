@@ -6,6 +6,12 @@ export class Card {
   _id: mongoose.Types.ObjectId;
 
   @Prop()
+  to_user_id: string;
+
+  @Prop()
+  to_user_name?: string;
+
+  @Prop()
   card_color: string;
 
   @Prop()

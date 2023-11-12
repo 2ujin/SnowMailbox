@@ -18,6 +18,8 @@ export interface IMailbox {
 
 export interface ICard {
   id?: any | null;
+  to_user_id?: string;
+  to_user_name?: string;
   card_color: string;
   card_sticker: string;
   card_deco: string;

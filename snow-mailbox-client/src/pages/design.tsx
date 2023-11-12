@@ -191,7 +191,6 @@ const ScrollWrapper = styled.div`
 
 const Design = () => {
   const { id } = useParams();
-
   const stickers_list = [
     "gift",
     "ginger",
@@ -243,6 +242,7 @@ const Design = () => {
 
   const handleSaveImage = async () => {
     await ApiService.createCard({
+      to_user_id: String(id),
       card_color: selectedColor,
       card_sticker: selectedSticker,
       card_deco: selectedDeco,
