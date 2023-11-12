@@ -32,6 +32,10 @@ const getCardId = (id: string) => {
   return http.get(`/letter/card/${id}`);
 };
 
+const getCardByUser = (id: string) => {
+  return http.get(`/letter/cards/${id}`);
+};
+
 const writeLetter = (data: any) => {
   return http.post("/letter", data);
 };
@@ -50,6 +54,7 @@ const ApiService = {
   createCard,
   getCardId,
   writeLetter,
+  getCardByUser,
 };
 
 export default ApiService;
