@@ -38,4 +38,12 @@ export class LetterService {
   async writeLetter(requestBody: Letters): Promise<Letters> {
     return await this.letterModel.create(requestBody);
   }
+
+  async selectLetter(card_id: string): Promise<Letters> {
+    const result = await this.letterModel.findOne({
+      card_id,
+    });
+    console.log(result);
+    return result;
+  }
 }

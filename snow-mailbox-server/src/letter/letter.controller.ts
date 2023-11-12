@@ -1,22 +1,7 @@
-import {
-  Body,
-  Controller,
-  Headers,
-  Get,
-  Param,
-  Post,
-  UseInterceptors,
-} from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { Model } from 'mongoose';
-import { extname } from 'path';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Letters } from 'src/schema/letter.schema';
-import { Mailbox } from 'src/schema/mailbox.schema';
 import { Users } from 'src/schema/users.schema';
-import { JwtService } from 'src/utils/jwt.service';
 import { LetterService } from './letter.service';
-import { diskStorage } from 'multer';
 import { Card } from 'src/schema/card.schema';
 
 @Controller('letter')
@@ -41,5 +26,11 @@ export class LetterController {
   @Post()
   async writeLetter(@Body() requestBody: Letters): Promise<Letters> {
     return this.letterService.writeLetter(requestBody);
+  }
+
+  @Get('/:id')
+  async selectLetter(@Param('id') id: string): Promise<Letters> {
+    console.log(id);
+    return this.letterService.selectLetter(id);
   }
 }
