@@ -40,6 +40,10 @@ const writeLetter = (data: any) => {
   return http.post("/letter", data);
 };
 
+const getLetter = (id: any) => {
+  return http.get(`/letter/${id}`);
+};
+
 const checkTocken = () => {
   const token = localStorage.getItem("token");
   return { Authorization: `Bearer ${token}` };
@@ -55,6 +59,7 @@ const ApiService = {
   getCardId,
   writeLetter,
   getCardByUser,
+  getLetter,
 };
 
 export default ApiService;

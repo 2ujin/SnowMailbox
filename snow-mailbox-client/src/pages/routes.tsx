@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Completed from "./completed";
 import Design from "./design";
 import Home from "./home";
+import LetterDetail from "./letter-detail";
 import Letters from "./letters";
 import Login from "./login";
 import Mailbox from "./mailbox";
@@ -31,6 +32,7 @@ const RoutesComponent = () => {
           <Route path="/design/:id" element={<Design />} />
           <Route path="/write/:id" element={<Write />} />
           <Route path="/completed" element={<Completed />} />
+          <Route path="/detail/:id" element={<LetterDetail />} />
         </Routes>
       </div>
     </BrowserRouter>

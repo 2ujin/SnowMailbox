@@ -30,11 +30,6 @@ const GiftImg = styled.img`
   width: 140px;
 `;
 
-const LetterImg = styled.img`
-  width: 100%;
-  margin-bottom: 10px;
-`;
-
 const Letter = styled.div`
   display: flex;
   flex-direction: column;

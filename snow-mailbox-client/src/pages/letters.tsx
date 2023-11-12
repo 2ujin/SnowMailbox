@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift_a.png";
 import letter from "../assets/letter.png";
@@ -39,6 +39,7 @@ const Card = styled.div<{ color?: string }>`
   height: 270px;
   padding: 21px;
   margin-bottom: 15px;
+  cursor: pointer;
   .card-text {
     font-family: "EF_jejudoldam";
     color: white;
@@ -67,6 +68,7 @@ const Card = styled.div<{ color?: string }>`
 const Letters = () => {
   const { id } = useParams();
   const [cards, setCards] = useState<ICard[]>([]);
+  const navigate = useNavigate();
 
   const getMailboxbyId = (id: string) => {
     ApiService.getCardByUser(id)
@@ -88,8 +90,11 @@ const Letters = () => {
         <Gift src={gift} />
 
         {cards.length > 0 &&
-          cards.map((card) => (
-            <Card color={card.card_color}>
+          cards.map((card: ICard) => (
+            <Card
+              onClick={() => navigate(`/detail/${card._id}`)}
+              color={card.card_color}
+            >
               <div className="card-text">
                 <img
                   src={require(`../assets/decorations/${card.card_deco}.png`)}
