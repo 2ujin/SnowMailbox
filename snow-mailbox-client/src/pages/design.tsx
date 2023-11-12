@@ -191,7 +191,6 @@ const ScrollWrapper = styled.div`
 
 const Design = () => {
   const { id } = useParams();
-
   const stickers_list = [
     "gift",
     "ginger",

@@ -16,6 +16,12 @@ export class LetterService {
     return create._id;
   }
 
+  async selectCard(_id: string): Promise<Card> {
+    return await this.cardModel.findOne({
+      _id,
+    });
+  }
+
   async writeLetter(requestBody: Letters): Promise<String> {
     console.log(requestBody);
     return '';

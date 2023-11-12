@@ -83,7 +83,7 @@ const MailboxSvg = ({ color }: any) => {
 };
 
 const Home = () => {
-  const initialTutorialState = {
+  const initMailState = {
     id: "",
     name: "",
     user_id: "",
@@ -93,7 +93,7 @@ const Home = () => {
 
   const navigate = useNavigate();
   const { id } = useParams();
-  const [data, setData] = useState<IMailbox>(initialTutorialState);
+  const [data, setData] = useState<IMailbox>(initMailState);
   const [isMyMailbox, setIsMyMailbox] = useState(false);
   let user: any = localStorage.getItem("user");
   user = JSON.parse(user);
@@ -102,7 +102,7 @@ const Home = () => {
   const christmas = moment("2023-12-25");
   const dday = christmas.diff(today, "days");
 
-  const getTutorial = (id: string) => {
+  const getMailboxbyId = (id: string) => {
     ApiService.getMailboxbyId(id)
       .then((response: any) => {
         if (response.data) setData(response.data);
@@ -130,7 +130,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (id) getTutorial(id);
+    if (id) getMailboxbyId(id);
   }, [id]);
 
   useEffect(() => {

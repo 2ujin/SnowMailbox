@@ -28,7 +28,11 @@ export class LetterController {
 
   @Post('/card')
   async createCard(@Body() requestBody: Card): Promise<String> {
-    console.log(requestBody);
     return this.letterService.createCard(requestBody);
+  }
+
+  @Get('/card/:id')
+  async selectCard(@Param('id') id: string): Promise<Card> {
+    return this.letterService.selectCard(id);
   }
 }

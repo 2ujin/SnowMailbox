@@ -28,6 +28,10 @@ const createCard = (data: ICard) => {
   return http.post("/letter/card", data);
 };
 
+const getCardId = (id: string) => {
+  return http.get(`/letter/card/${id}`);
+};
+
 const writeLetter = (data: any, headers?: any) => {
   return http.post("/letter", data, headers);
 };
@@ -44,6 +48,7 @@ const ApiService = {
   getMailbox,
   getMailboxbyId,
   createCard,
+  getCardId,
   writeLetter,
 };
 
