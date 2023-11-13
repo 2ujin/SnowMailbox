@@ -33,15 +33,6 @@ const MailboxWrapper = styled.div`
   margin-top: 30px;
 `;
 
-const DecorationImg = styled.img`
-  width: 70px;
-  position: absolute;
-  top: 140px;
-  left: 54%;
-  transform: translateX(-50%);
-  z-index: 999;
-`;
-
 const Dday = styled.div`
   color: #fff;
   font-size: 36px;
@@ -56,41 +47,6 @@ const Dday = styled.div`
 
 let user: IUsers | any = localStorage.getItem("user");
 user = JSON.parse(user);
-
-const MailboxSvg = ({ color }: any) => {
-  const navigate = useNavigate();
-  return (
-    <div
-      onClick={() => navigate(`/letters/${user._id}`)}
-      style={{ cursor: "pointer" }}
-    >
-      <svg
-        width="290"
-        height="334"
-        viewBox="0 0 290 334"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M71.5 181.096L40.5 1.09644H250.5C271.5 1.09641 289.5 29.5964 289.5 61.5964V173.074L71.5 181.096Z"
-          fill={color}
-        />
-        <path
-          d="M71.5 181.096L1 168.096L2 44.5963C2.5 24.0963 14 -3.40369 42 1.59629C60.6242 4.92202 72 32.5963 71.5 44.5963V181.096Z"
-          fill={color}
-          stroke="#4D4D4D"
-          stroke-opacity="0.16"
-        />
-        <path d="M138 334V155H165V334H138Z" fill={color} />
-        <path
-          d="M10.4238 54.1357L10.5819 44.137L56.5762 44.8644L56.418 54.8631L10.4238 54.1357Z"
-          fill="#676767"
-          fill-opacity="0.23"
-        />
-      </svg>
-    </div>
-  );
-};
 
 const Home = () => {
   const initMailState = {
@@ -177,14 +133,6 @@ const Home = () => {
           <Dday>
             <img src={calendar} /> D - {dday}
           </Dday>
-          {/* {data.mailbox_decorations ? (
-            <DecorationImg
-              src={require(`../assets/decorations/${data.mailbox_decorations}.png`)}
-            />
-          ) : (
-            <></>
-          )}
-          <MailboxSvg className="name" color={data.mailbox_color} /> */}
           {data.mailbox_decorations ? (
             <MailboxImg
               is_style={true}
@@ -196,7 +144,6 @@ const Home = () => {
             <></>
           )}
 
-          {/* <Mailbox  src={mailbox} /> */}
           <ButtonWrapper>
             <Button
               onClick={handleButtonClick}
