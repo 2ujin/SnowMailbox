@@ -73,13 +73,13 @@ const MailboxSvg = ({ color, is_click }: any) => {
           d="M71.5 181.096L1 168.096L2 44.5963C2.5 24.0963 14 -3.40369 42 1.59629C60.6242 4.92202 72 32.5963 71.5 44.5963V181.096Z"
           fill={color}
           stroke="#4D4D4D"
-          stroke-opacity="0.16"
+          strokeOpacity="0.16"
         />
         <path d="M138 334V155H165V334H138Z" fill={color} />
         <path
           d="M10.4238 54.1357L10.5819 44.137L56.5762 44.8644L56.418 54.8631L10.4238 54.1357Z"
           fill="#676767"
-          fill-opacity="0.23"
+          fillOpacity="0.23"
         />
       </svg>
     </div>

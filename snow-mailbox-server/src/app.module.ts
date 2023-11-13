@@ -1,16 +1,17 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { MulterModule } from '@nestjs/platform-express';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth.module';
 import { LetterModule } from './letter/letter.module';
 import { MailboxModule } from './mailbox/mailbox.module';
 import { UsersModule } from './users/users.module';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/snowmailbox'),
+    MongooseModule.forRoot(process.env.MONGODB_URI),
     UsersModule,
     MailboxModule,
     AuthModule,
