@@ -5,11 +5,8 @@ import { useNavigate } from "react-router-dom";
 import apiService from "./services/apiService";
 import { IUsers } from "./types/Users";
 const GoogleLoginButton = () => {
-  const clientId =
-    "705147682536-svudhbtvg80n9d11nbnt6pirgkfrtjq1.apps.googleusercontent.com";
-
+  const clientId = process.env.REACT_APP_CLIENT_KEY || "";
   const navigate = useNavigate();
-
   const googleLoginSuccess = (res: any) => {
     const decoded: IUsers = jwtDecode(res.credential);
     const { name, email, locale, sub, nickname } = decoded;
