@@ -1,7 +1,11 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import snowman from "../assets/snowman_angle.png";
 import sock from "../assets/sock.png";
 import GoogleLoginButton from "../googleLogin";
+import apiService from "../services/apiService";
+import { IUsers } from "../types/Users";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -39,6 +43,21 @@ const LoginBtn = styled.div`
 `;
 
 const Login = () => {
+  const [data, setData] = useState<any>(false);
+  const navigate = useNavigate();
+
+  const getMailboxbyId = async () => {
+    const is_mailbox = await apiService.getMailbox();
+    setData(is_mailbox);
+    if (is_mailbox.data) {
+      navigate(`/${is_mailbox.data._id}`);
+    }
+  };
+
+  useEffect(() => {
+    if (!data) getMailboxbyId();
+  }, [data]);
+
   return (
     <>
       <Wrapper>
