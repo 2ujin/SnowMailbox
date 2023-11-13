@@ -103,6 +103,8 @@ const Home = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [data, setData] = useState<IMailbox>(initMailState);
+  const [count, setCount] = useState<Number>(0);
+
   const [isMyMailbox, setIsMyMailbox] = useState(false);
 
   const today = moment().format("YYYY-MM-DD");
@@ -113,6 +115,16 @@ const Home = () => {
     ApiService.getMailboxbyId(id)
       .then((response: any) => {
         if (response.data) setData(response.data);
+      })
+      .catch((e: Error) => {
+        console.log(e);
+      });
+  };
+
+  const getCardCount = () => {
+    ApiService.getCardCount()
+      .then((response: any) => {
+        if (response.data) setCount(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
@@ -146,10 +158,15 @@ const Home = () => {
     }
   }, [data, user]);
 
+  useEffect(() => {
+    getCardCount();
+  }, [count]);
+
   return (
     <>
       <Wrapper>
         <HomeHeader
+          count={count}
           isMyMailbox={isMyMailbox}
           name={isMyMailbox ? data.name : "하위"}
         />
