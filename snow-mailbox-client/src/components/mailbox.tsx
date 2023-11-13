@@ -79,7 +79,7 @@ const MailboxSvg = ({ color, is_click }: any) => {
   );
 };
 
-const MailboxImg = ({ deco, color, name, is_style }: any) => {
+const MailboxImg = ({ deco, color, name, is_style, is_mymailbox }: any) => {
   return (
     <>
       <DecorationImg
@@ -89,7 +89,7 @@ const MailboxImg = ({ deco, color, name, is_style }: any) => {
       <MailboxName className={is_style ? "style" : ""}>
         {name}'s mailbox
       </MailboxName>
-      <MailboxSvg className="name" color={color} is_click={is_style} />
+      <MailboxSvg className="name" color={color} is_click={is_mymailbox} />
     </>
   );
 };

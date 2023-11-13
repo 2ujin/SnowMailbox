@@ -71,7 +71,10 @@ const Home = () => {
   const getMailboxbyId = (id: string) => {
     ApiService.getMailboxbyId(id)
       .then((response: any) => {
-        if (response.data) setData(response.data);
+        if (response.data) {
+          console.log(response.data);
+          setData(response.data);
+        }
       })
       .catch((e: Error) => {
         console.log(e);
@@ -122,11 +125,7 @@ const Home = () => {
   return (
     <>
       <Wrapper>
-        <HomeHeader
-          count={count}
-          isMyMailbox={isMyMailbox}
-          name={isMyMailbox ? data.name : "하위"}
-        />
+        <HomeHeader count={count} isMyMailbox={isMyMailbox} name={data.name} />
         <HomeSubHeader isMyMailbox={isMyMailbox} />
 
         <MailboxWrapper>
@@ -135,6 +134,7 @@ const Home = () => {
           </Dday>
           {data.mailbox_decorations ? (
             <MailboxImg
+              is_mymailbox={isMyMailbox}
               is_style={true}
               deco={data.mailbox_decorations}
               color={data.mailbox_color}

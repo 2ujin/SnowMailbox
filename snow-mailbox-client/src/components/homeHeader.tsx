@@ -62,7 +62,7 @@ const HomeHeader = ({ count, name, isMyMailbox }: any) => {
         ) : (
           <>
             Welcome to <br />
-            Jin's <b> Mailbox</b>
+            {name}'s <b> Mailbox</b>
           </>
         )}
       </HeaderWrapper>

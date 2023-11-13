@@ -88,8 +88,7 @@ const Letters = () => {
       <Wrapper>
         <Title>Received </Title>
         <Gift src={gift} />
-
-        {cards.length > 0 &&
+        {cards.length > 0 ? (
           cards.map((card: ICard) => (
             <Card
               onClick={() => navigate(`/detail/${card._id}`)}
@@ -114,7 +113,10 @@ const Letters = () => {
                 src={require(`../assets/stickers/${card.card_sticker}.png`)}
               />
             </Card>
-          ))}
+          ))
+        ) : (
+          <>You haven't received any letters yet</>
+        )}
       </Wrapper>
     </>
   );
