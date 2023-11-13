@@ -54,7 +54,6 @@ export class LetterController {
 
   @Get('/:id')
   async selectLetter(@Param('id') id: string): Promise<Letters> {
-    console.log(id);
     return this.letterService.selectLetter(id);
   }
 }

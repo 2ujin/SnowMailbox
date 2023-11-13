@@ -1,5 +1,5 @@
 import http from "../http-common";
-import { ICard, IMailbox, IUsers } from "../types/Users";
+import { ICard, ILetter, IMailbox, IUsers } from "../types/Users";
 
 const login = (body: IUsers) => {
   return http.post("/auth/login", body);
@@ -36,17 +36,16 @@ const getCardByUser = (id: string) => {
   return http.get(`/letter/cards/${id}`);
 };
 
-const writeLetter = (data: any) => {
+const writeLetter = (data: ILetter) => {
   return http.post("/letter", data);
 };
 
-const getLetter = (id: any) => {
+const getLetter = (id: string) => {
   return http.get(`/letter/${id}`);
 };
 
 const getCardCount = () => {
   const headers = checkTocken();
-  console.log(headers);
   return http.get(`/letter/card-counting`, { headers });
 };
 
@@ -55,7 +54,7 @@ const checkTocken = () => {
   return { Authorization: `Bearer ${token}` };
 };
 
-const ApiService = {
+const apiService = {
   getUser,
   login,
   createMailbox,
@@ -69,4 +68,4 @@ const ApiService = {
   getCardCount,
 };
 
-export default ApiService;
+export default apiService;

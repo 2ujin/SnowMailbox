@@ -1,10 +1,9 @@
-import { Body, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Card } from 'src/schema/card.schema';
 import { Letters } from 'src/schema/letter.schema';
 import { Mailbox } from 'src/schema/mailbox.schema';
-import { Users } from 'src/schema/users.schema';
 
 @Injectable()
 export class LetterService {

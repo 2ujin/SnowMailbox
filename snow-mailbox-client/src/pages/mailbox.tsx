@@ -4,8 +4,9 @@ import styled from "styled-components";
 import gift from "../assets/hand_gift.png";
 import Button from "../components/button";
 import MailboxImg from "../components/mailboxImg";
-import ApiService from "../services/apiService";
+import apiService from "../services/apiService";
 import { IMailbox } from "../types/Users";
+import { color_list, deco_list } from "../utils/common";
 
 const Wrapper = styled.div`
   height: 100%;
@@ -112,76 +113,8 @@ const ButtonWrapper = styled.div`
   margin-top: 20px;
 `;
 
-const DecorationImg = styled.img`
-  width: 50px;
-  position: absolute;
-  top: 55px;
-  left: 54%;
-  transform: translateX(-50%);
-  z-index: 999;
-`;
-
-const MailboxName = styled.div`
-  color: white;
-  font-family: "EF_jejudoldam";
-  font-size: 16px;
-  position: absolute;
-  top: 25px;
-  left: 54%;
-  transform: translateX(-50%);
-  z-index: 999;
-`;
-
-const MailboxSvg = ({ color }: any) => {
-  return (
-    <svg
-      width="290"
-      height="334"
-      viewBox="0 0 290 334"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M71.5 181.096L40.5 1.09644H250.5C271.5 1.09641 289.5 29.5964 289.5 61.5964V173.074L71.5 181.096Z"
-        fill={color}
-      />
-      <path
-        d="M71.5 181.096L1 168.096L2 44.5963C2.5 24.0963 14 -3.40369 42 1.59629C60.6242 4.92202 72 32.5963 71.5 44.5963V181.096Z"
-        fill={color}
-        stroke="#4D4D4D"
-        stroke-opacity="0.16"
-      />
-      <path d="M138 334V155H165V334H138Z" fill={color} />
-      <path
-        d="M10.4238 54.1357L10.5819 44.137L56.5762 44.8644L56.418 54.8631L10.4238 54.1357Z"
-        fill="#676767"
-        fill-opacity="0.23"
-      />
-    </svg>
-  );
-};
-
 const Mailbox = () => {
   const navigate = useNavigate();
-  const color_list = [
-    "#C60000",
-    "#730F13",
-    "#4F8A3D",
-    "#71372A",
-    "#A2E2F0",
-    "#F2B243",
-  ];
-
-  const deco_list = [
-    "bell",
-    "star",
-    "christmas-ball",
-    "snowflake",
-    "wreath",
-    "leaf",
-    "ginger",
-    "sock",
-  ];
 
   const [name, setName] = useState("");
   const [selectedColor, setSelectedState] = useState(color_list[0]);
@@ -198,7 +131,8 @@ const Mailbox = () => {
       mailbox_decorations: selectedDeco,
     };
 
-    await ApiService.createMailbox(create)
+    await apiService
+      .createMailbox(create)
       .then((response) => {
         navigate(`/${response.data}`);
       })
@@ -211,7 +145,7 @@ const Mailbox = () => {
         <Title>
           Make your <br /> own <b>Mailbox!</b>
         </Title>
-        <GiftImg src={gift} />
+        <GiftImg src={gift} alt="gift" />
 
         <ItemWrapper>
           <span>Name</span>
@@ -246,7 +180,10 @@ const Mailbox = () => {
                 onClick={() => setDecoState(name)}
                 className={name === selectedDeco ? "is_active" : ""}
               >
-                <img src={require(`../assets/decorations/${name}.png`)} />
+                <img
+                  alt="decorations"
+                  src={require(`../assets/decorations/${name}.png`)}
+                />
               </Deco>
             ))}
           </DecoWrapper>

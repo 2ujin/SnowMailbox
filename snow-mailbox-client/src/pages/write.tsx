@@ -4,8 +4,8 @@ import styled from "styled-components";
 import gift from "../assets/hand_gift.png";
 import Button from "../components/button";
 import letter from "../assets/letter.png";
-import ApiService from "../services/apiService";
-import { ICard } from "../types/Users";
+import apiService from "../services/apiService";
+import { ICard, ILetter } from "../types/Users";
 import CardImg from "../components/cardImg";
 
 const Wrapper = styled.div`
@@ -221,18 +221,19 @@ const Write = () => {
   };
 
   const handleSubmit = async () => {
-    const create = {
+    const create: ILetter = {
       card_id: id,
       to_user_id: card.to_user_id,
       letter: textareaValue,
       poststamp: selectedDeco,
       from_user_name: inputValue,
     };
-    await ApiService.writeLetter(create).then((res) => navigate("/completed"));
+    await apiService.writeLetter(create).then((res) => navigate("/completed"));
   };
 
   const getCardId = (id: string) => {
-    ApiService.getCardId(id)
+    apiService
+      .getCardId(id)
       .then((response: any) => {
         if (response.data) setCard(response.data);
       })

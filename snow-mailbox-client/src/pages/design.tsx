@@ -1,12 +1,16 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift.png";
 import Button from "../components/button";
-import html2canvas from "html2canvas";
-import ApiService from "../services/apiService";
-import saveAs from "file-saver";
+import apiService from "../services/apiService";
 import CardImg from "../components/cardImg";
+import {
+  color_list,
+  deco_list,
+  stickers_list,
+  text_list,
+} from "../utils/common";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -157,47 +161,6 @@ const ScrollWrapper = styled.div`
 
 const Design = () => {
   const { id } = useParams();
-  const stickers_list = [
-    "gift",
-    "ginger",
-    "snowman",
-    "tree",
-    "santa_glasses",
-    "santa1",
-    "santa2",
-    "santa3",
-    "santa4",
-    "santa5",
-  ];
-
-  const color_list = [
-    "#C60000",
-    "#730F13",
-    "#4F8A3D",
-    "#71372A",
-    "#A2E2F0",
-    "#F2B243",
-  ];
-
-  const deco_list = [
-    "bell",
-    "star",
-    "christmas-ball",
-    "snowflake",
-    "wreath",
-    "leaf",
-    "ginger",
-    "sock",
-  ];
-
-  const text_list = [
-    "Merry Christmas!",
-    "I LOVE YOU",
-    "Merry X-mas",
-    "Happy Christmas",
-    "Happy New Year :)",
-    "HO HO HO",
-  ];
 
   const [selectedColor, setSelectedState] = useState(color_list[0]);
   const [selectedSticker, setStickerState] = useState(stickers_list[0]);
@@ -206,16 +169,18 @@ const Design = () => {
 
   const navigate = useNavigate();
 
-  const handleSaveImage = async () => {
-    await ApiService.createCard({
-      to_user_id: String(id),
-      card_color: selectedColor,
-      card_sticker: selectedSticker,
-      card_deco: selectedDeco,
-      card_text: selectedText,
-    }).then((response) => {
-      navigate(`/write/${response.data}`);
-    });
+  const handleSaveDesign = async () => {
+    await apiService
+      .createCard({
+        to_user_id: String(id),
+        card_color: selectedColor,
+        card_sticker: selectedSticker,
+        card_deco: selectedDeco,
+        card_text: selectedText,
+      })
+      .then((response) => {
+        navigate(`/write/${response.data}`);
+      });
   };
 
   return (
@@ -258,6 +223,7 @@ const Design = () => {
                   className={name === selectedSticker ? "is_active" : ""}
                 >
                   <img
+                    alt="tree"
                     className={name === "tree" ? "tree" : ""}
                     src={require(`../assets/stickers/${name}.png`)}
                   />
@@ -275,7 +241,10 @@ const Design = () => {
                   onClick={() => setDecoState(name)}
                   className={name === selectedDeco ? "is_active" : ""}
                 >
-                  <img src={require(`../assets/decorations/${name}.png`)} />
+                  <img
+                    alt="decorations"
+                    src={require(`../assets/decorations/${name}.png`)}
+                  />
                 </Deco>
               ))}
             </DecoWrapper>
@@ -295,7 +264,7 @@ const Design = () => {
           </ItemWrapper>
 
           <ButtonWrapper>
-            <Button onClick={handleSaveImage} name="Next" />
+            <Button onClick={handleSaveDesign} name="Next" />
           </ButtonWrapper>
         </ScrollWrapper>
       </Wrapper>

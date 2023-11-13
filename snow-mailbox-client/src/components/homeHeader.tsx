@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import santa from "../assets/santa_glasses.png";
 
+interface HeaderProps {
+  count: number;
+  name: string;
+  isMyMailbox?: boolean;
+}
+
 const Wrapper = styled.div`
   position: relative;
 `;
@@ -45,8 +51,7 @@ const SantaWrapper = styled.div`
   }
 `;
 
-const HomeHeader = ({ count, name, isMyMailbox }: any) => {
-  console.log(count);
+const HomeHeader = ({ count, name, isMyMailbox }: HeaderProps) => {
   return (
     <Wrapper>
       <HeaderWrapper className={!isMyMailbox ? "center" : ""}>
@@ -70,7 +75,7 @@ const HomeHeader = ({ count, name, isMyMailbox }: any) => {
         )}
       </HeaderWrapper>
       <SantaWrapper>
-        <img src={santa} />
+        <img src={santa} alt="santa" />
       </SantaWrapper>
     </Wrapper>
   );

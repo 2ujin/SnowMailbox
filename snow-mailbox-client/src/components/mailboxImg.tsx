@@ -1,7 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import santa from "../assets/santa_glasses.png";
 import { IUsers } from "../types/Users";
+
+interface DesignProps {
+  deco: string;
+  color: string | any;
+  name: string;
+  is_style?: boolean;
+  is_mymailbox?: boolean;
+}
 
 const DecorationImg = styled.img`
   width: 50px;
@@ -79,7 +86,13 @@ const MailboxSvg = ({ color, is_click }: any) => {
   );
 };
 
-const MailboxImg = ({ deco, color, name, is_style, is_mymailbox }: any) => {
+const MailboxImg = ({
+  deco,
+  color,
+  name,
+  is_style,
+  is_mymailbox,
+}: DesignProps) => {
   return (
     <>
       <DecorationImg

@@ -4,7 +4,7 @@ import HomeHeader from "../components/homeHeader";
 import HomeSubHeader from "../components/homeSubHeader";
 import Button from "../components/button";
 import calendar from "../assets/calendar.png";
-import ApiService from "../services/apiService";
+import apiService from "../services/apiService";
 import { useState, useEffect } from "react";
 import { IMailbox, IUsers } from "../types/Users";
 import moment from "moment";
@@ -69,7 +69,8 @@ const Home = () => {
   const dday = christmas.diff(today, "days");
 
   const getMailboxbyId = (id: string) => {
-    ApiService.getMailboxbyId(id)
+    apiService
+      .getMailboxbyId(id)
       .then((response: any) => {
         if (response.data) setData(response.data);
       })
@@ -79,7 +80,8 @@ const Home = () => {
   };
 
   const getCardCount = () => {
-    ApiService.getCardCount()
+    apiService
+      .getCardCount()
       .then((response: any) => {
         if (response.data) setCount(response.data);
       })
@@ -113,7 +115,7 @@ const Home = () => {
     if (data.user_id === user?._id) {
       setIsMyMailbox(true);
     }
-  }, [data, user]);
+  }, [data.user_id]);
 
   useEffect(() => {
     getCardCount();
@@ -122,12 +124,16 @@ const Home = () => {
   return (
     <>
       <Wrapper>
-        <HomeHeader count={count} isMyMailbox={isMyMailbox} name={data.name} />
+        <HomeHeader
+          count={Number(count)}
+          isMyMailbox={isMyMailbox}
+          name={data.name}
+        />
         <HomeSubHeader isMyMailbox={isMyMailbox} />
 
         <MailboxWrapper>
           <Dday>
-            <img src={calendar} /> D - {dday}
+            <img src={calendar} alt="calendar" /> D - {dday}
           </Dday>
           {data.mailbox_decorations ? (
             <MailboxImg

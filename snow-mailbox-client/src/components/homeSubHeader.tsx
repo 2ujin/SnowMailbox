@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import snowman from "../assets/snowman.png";
 
+interface HeaderProps {
+  isMyMailbox: boolean;
+}
+
 const Wrapper = styled.div`
   position: relative;
   margin-top: 40px;
@@ -41,7 +45,7 @@ const SantaWrapper = styled.div`
   }
 `;
 
-const HomeSubHeader = ({ isMyMailbox }: any) => {
+const HomeSubHeader = ({ isMyMailbox }: HeaderProps) => {
   return (
     <Wrapper>
       <HeaderWrapper className={!isMyMailbox ? "center" : ""}>
@@ -58,7 +62,7 @@ const HomeSubHeader = ({ isMyMailbox }: any) => {
         )}
       </HeaderWrapper>
       <SantaWrapper>
-        <img src={snowman} />
+        <img src={snowman} alt="snowman" />
       </SantaWrapper>
     </Wrapper>
   );

@@ -28,7 +28,7 @@ export interface ICard {
 export interface ILetter {
   _id?: any | null;
   to_user_id?: string;
-  card_id: string;
+  card_id: string | any;
   from_user_name: string;
   letter: string;
   poststamp: string;

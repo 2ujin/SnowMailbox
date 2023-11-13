@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import snowman from "../assets/snowman_angle.png";
 import sock from "../assets/sock.png";

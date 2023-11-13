@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift_a.png";
 import CardImg from "../components/cardImg";
-import ApiService from "../services/apiService";
+import apiService from "../services/apiService";
 import { ICard, ILetter } from "../types/Users";
 import wreath from "../assets/wreath.png";
 
@@ -130,10 +130,9 @@ const LetterDetail = () => {
     poststamp: "",
   });
 
-  const navigate = useNavigate();
-
-  const getMailboxbyId = (id: string) => {
-    ApiService.getCardId(id)
+  const getCardId = (id: string) => {
+    apiService
+      .getCardId(id)
       .then((response: any) => {
         if (response.data) setCard(response.data);
       })
@@ -142,9 +141,9 @@ const LetterDetail = () => {
       });
   };
 
-  const getLetterById = (id: string) => {
-    console.log(id);
-    ApiService.getLetter(id)
+  const getLetter = (id: string) => {
+    apiService
+      .getLetter(id)
       .then((response: any) => {
         if (response.data) setLetter(response.data);
       })
@@ -154,11 +153,11 @@ const LetterDetail = () => {
   };
 
   useEffect(() => {
-    if (id) getMailboxbyId(id);
+    if (id) getCardId(id);
   }, [id]);
 
   useEffect(() => {
-    if (card._id) getLetterById(card._id);
+    if (card._id) getLetter(card._id);
   }, [card._id]);
 
   return (
@@ -187,6 +186,7 @@ const LetterDetail = () => {
             </div>
             <div className="poststamp">
               <img
+                alt="decorations"
                 src={require(`../assets/decorations/${letter.poststamp}.png`)}
               />
             </div>
