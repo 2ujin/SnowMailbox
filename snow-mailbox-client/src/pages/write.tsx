@@ -6,6 +6,7 @@ import Button from "../components/button";
 import letter from "../assets/letter.png";
 import ApiService from "../services/apiService";
 import { ICard } from "../types/Users";
+import CardImg from "../components/cardImg";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -40,6 +41,7 @@ const Letter = styled.div`
   color: #353535;
   font-family: "EF_jejudoldam";
   position: relative;
+  margin-top: 5px;
   .to {
     display: flex;
     align-items: center;
@@ -251,26 +253,12 @@ const Write = () => {
         </Title>
         <GiftImg src={gift} />
         {card.card_color ? (
-          <Card color={card.card_color}>
-            <div className="card-text">
-              <img
-                src={require(`../assets/decorations/${card.card_deco}.png`)}
-              />
-              {card.card_text}
-            </div>
-            <img
-              className={`sticker ${
-                card.card_sticker === "tree"
-                  ? "tree"
-                  : card.card_sticker === "santa_glasses" ||
-                    card.card_sticker === "santa2" ||
-                    card.card_sticker === "santa5"
-                  ? "small"
-                  : ""
-              }`}
-              src={require(`../assets/stickers/${card.card_sticker}.png`)}
-            />
-          </Card>
+          <CardImg
+            color={card.card_color}
+            deco={card.card_deco}
+            text={card.card_text}
+            sticker={card.card_sticker}
+          />
         ) : (
           <></>
         )}

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift.png";
 import Button from "../components/button";
-import MailboxImg from "../components/mailbox";
+import MailboxImg from "../components/mailboxImg";
 import ApiService from "../services/apiService";
 import { IMailbox } from "../types/Users";
 

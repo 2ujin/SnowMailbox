@@ -8,7 +8,7 @@ import ApiService from "../services/apiService";
 import { useState, useEffect } from "react";
 import { IMailbox, IUsers } from "../types/Users";
 import moment from "moment";
-import MailboxImg from "../components/mailbox";
+import MailboxImg from "../components/mailboxImg";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -71,10 +71,7 @@ const Home = () => {
   const getMailboxbyId = (id: string) => {
     ApiService.getMailboxbyId(id)
       .then((response: any) => {
-        if (response.data) {
-          console.log(response.data);
-          setData(response.data);
-        }
+        if (response.data) setData(response.data);
       })
       .catch((e: Error) => {
         console.log(e);
