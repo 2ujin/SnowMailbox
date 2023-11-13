@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift_a.png";
-import letter from "../assets/letter.png";
+import CardImg from "../components/cardImg";
 import ApiService from "../services/apiService";
 import { ICard } from "../types/Users";
 
@@ -88,33 +88,19 @@ const Letters = () => {
       <Wrapper>
         <Title>Received </Title>
         <Gift src={gift} />
-
-        {cards.length > 0 &&
+        {cards.length > 0 ? (
           cards.map((card: ICard) => (
-            <Card
+            <CardImg
               onClick={() => navigate(`/detail/${card._id}`)}
               color={card.card_color}
-            >
-              <div className="card-text">
-                <img
-                  src={require(`../assets/decorations/${card.card_deco}.png`)}
-                />
-                {card.card_text}
-              </div>
-              <img
-                className={`sticker ${
-                  card.card_sticker === "tree"
-                    ? "tree"
-                    : card.card_sticker === "santa_glasses" ||
-                      card.card_sticker === "santa2" ||
-                      card.card_sticker === "santa5"
-                    ? "small"
-                    : ""
-                }`}
-                src={require(`../assets/stickers/${card.card_sticker}.png`)}
-              />
-            </Card>
-          ))}
+              deco={card.card_deco}
+              text={card.card_text}
+              sticker={card.card_sticker}
+            />
+          ))
+        ) : (
+          <>You haven't received any letters yet</>
+        )}
       </Wrapper>
     </>
   );

@@ -6,6 +6,7 @@ import Button from "../components/button";
 import html2canvas from "html2canvas";
 import ApiService from "../services/apiService";
 import saveAs from "file-saver";
+import CardImg from "../components/cardImg";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -28,41 +29,6 @@ const GiftImg = styled.img`
   top: 50px;
   right: 0;
   width: 140px;
-`;
-
-const Card = styled.div<{ color?: string }>`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  background: ${(props) => props.color};
-  width: 100%;
-  height: 270px;
-  padding: 21px;
-  .card-text {
-    font-family: "EF_jejudoldam";
-    color: white;
-    font-size: 23px;
-    display: flex;
-    align-items: center;
-    img {
-      width: 30px;
-      margin-right: 10px;
-    }
-  }
-  .sticker {
-    width: 140px;
-    margin-top: 25px;
-
-    &.tree {
-      width: 70px;
-    }
-
-    &.small {
-      width: 100px;
-    }
-  }
 `;
 
 const ItemWrapper = styled.div`
@@ -259,24 +225,13 @@ const Design = () => {
           Design <br /> <b>Christmas card!</b>
         </Title>
         <GiftImg src={gift} />
-        <Card color={selectedColor}>
-          <div className="card-text">
-            <img src={require(`../assets/decorations/${selectedDeco}.png`)} />
-            {selectedText}
-          </div>
-          <img
-            className={`sticker ${
-              selectedSticker === "tree"
-                ? "tree"
-                : selectedSticker === "santa_glasses" ||
-                  selectedSticker === "santa2" ||
-                  selectedSticker === "santa5"
-                ? "small"
-                : ""
-            }`}
-            src={require(`../assets/stickers/${selectedSticker}.png`)}
-          />
-        </Card>
+
+        <CardImg
+          color={selectedColor}
+          deco={selectedDeco}
+          text={selectedText}
+          sticker={selectedSticker}
+        />
 
         <ScrollWrapper>
           <ItemWrapper>

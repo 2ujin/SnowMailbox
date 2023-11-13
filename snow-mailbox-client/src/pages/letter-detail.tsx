@@ -1,9 +1,8 @@
-import { resolve } from "path";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift_a.png";
-import letter from "../assets/letter.png";
+import CardImg from "../components/cardImg";
 import ApiService from "../services/apiService";
 import { ICard, ILetter } from "../types/Users";
 
@@ -28,43 +27,6 @@ const Gift = styled.img`
   right: 30px;
 `;
 
-const Card = styled.div<{ color?: string }>`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  background: ${(props) => props.color};
-  width: 100%;
-  height: 270px;
-  padding: 21px;
-  margin-bottom: 15px;
-  cursor: pointer;
-  .card-text {
-    font-family: "EF_jejudoldam";
-    color: white;
-    font-size: 23px;
-    display: flex;
-    align-items: center;
-    img {
-      width: 30px;
-      margin-right: 10px;
-    }
-  }
-  .sticker {
-    width: 140px;
-    margin-top: 25px;
-
-    &.tree {
-      width: 70px;
-    }
-
-    &.small {
-      width: 100px;
-    }
-  }
-`;
-
 const Letter = styled.div`
   display: flex;
   flex-direction: column;
@@ -75,6 +37,7 @@ const Letter = styled.div`
   color: #353535;
   font-family: "EF_jejudoldam";
   position: relative;
+  margin-top: 10px;
   .to {
     display: flex;
     align-items: center;
@@ -197,29 +160,12 @@ const LetterDetail = () => {
         <Gift src={gift} />
 
         {card._id ? (
-          <Card
-            onClick={() => navigate(`/detail/${card._id}`)}
+          <CardImg
             color={card.card_color}
-          >
-            <div className="card-text">
-              <img
-                src={require(`../assets/decorations/${card.card_deco}.png`)}
-              />
-              {card.card_text}
-            </div>
-            <img
-              className={`sticker ${
-                card.card_sticker === "tree"
-                  ? "tree"
-                  : card.card_sticker === "santa_glasses" ||
-                    card.card_sticker === "santa2" ||
-                    card.card_sticker === "santa5"
-                  ? "small"
-                  : ""
-              }`}
-              src={require(`../assets/stickers/${card.card_sticker}.png`)}
-            />
-          </Card>
+            deco={card.card_deco}
+            text={card.card_text}
+            sticker={card.card_sticker}
+          />
         ) : (
           <></>
         )}
