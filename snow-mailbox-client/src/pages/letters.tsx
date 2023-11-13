@@ -18,7 +18,18 @@ const Title = styled.div`
   color: #fff;
   font-size: 36px;
 
+  margin-bottom: 10px;
+`;
+
+const Desc = styled.div`
+  font-size: 17px;
   margin-bottom: 60px;
+  font-family: "GmarketSans";
+  line-height: 150%;
+
+  b {
+    color: #d23039;
+  }
 `;
 
 const Gift = styled.img`
@@ -87,6 +98,10 @@ const Letters = () => {
     <>
       <Wrapper>
         <Title>Received </Title>
+        <Desc>
+          You can read the received message on <b>December 25th 🎄</b>
+        </Desc>
+
         <Gift src={gift} />
         {cards.length > 0 ? (
           cards.map((card: ICard) => (

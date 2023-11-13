@@ -5,6 +5,7 @@ import gift from "../assets/hand_gift_a.png";
 import CardImg from "../components/cardImg";
 import ApiService from "../services/apiService";
 import { ICard, ILetter } from "../types/Users";
+import wreath from "../assets/wreath.png";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -107,6 +108,13 @@ const Letter = styled.div`
   }
 `;
 
+const WreathImg = styled.img`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 250px;
+`;
+
 const LetterDetail = () => {
   const { id } = useParams();
   const [card, setCard] = useState<ICard>({
@@ -158,6 +166,8 @@ const LetterDetail = () => {
       <Wrapper>
         <Title>Received </Title>
         <Gift src={gift} />
+
+        <WreathImg src={wreath} />
 
         {card._id ? (
           <CardImg
