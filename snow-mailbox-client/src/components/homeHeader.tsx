@@ -41,7 +41,7 @@ const SantaWrapper = styled.div`
   }
 `;
 
-const HomeHeader = ({ name, isMyMailbox }: any) => {
+const HomeHeader = ({ count, name, isMyMailbox }: any) => {
   return (
     <Wrapper>
       <HeaderWrapper className={!isMyMailbox ? "center" : ""}>
@@ -49,7 +49,7 @@ const HomeHeader = ({ name, isMyMailbox }: any) => {
           <>
             Hello! {name} :)
             <br />
-            <b>3</b> letters received!
+            <b>{count}</b> letters received!
           </>
         ) : (
           <>

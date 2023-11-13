@@ -29,6 +29,12 @@ export class LetterService {
     return card;
   }
 
+  async selectCardCount(to_user_id: string): Promise<Number> {
+    return await this.cardModel.countDocuments({
+      to_user_id,
+    });
+  }
+
   async selectCardByUser(to_user_id: string): Promise<Card[]> {
     return await this.cardModel.find({
       to_user_id,
@@ -40,10 +46,8 @@ export class LetterService {
   }
 
   async selectLetter(card_id: string): Promise<Letters> {
-    const result = await this.letterModel.findOne({
+    return await this.letterModel.findOne({
       card_id,
     });
-    console.log(result);
-    return result;
   }
 }

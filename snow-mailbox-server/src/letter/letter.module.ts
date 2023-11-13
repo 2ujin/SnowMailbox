@@ -14,14 +14,10 @@ import { LetterService } from './letter.service';
       { name: Letters.name, schema: LettersSchema },
       { name: Mailbox.name, schema: MailboxSchema },
       { name: Card.name, schema: CardSchema },
+      { name: Users.name, schema: UsersSchema },
     ]),
-    MulterModule.register({
-      limits: {
-        fileSize: 1024 * 1024 * 10, // 10MB로 제한 (원하는 크기로 조절)
-      },
-    }),
   ],
   controllers: [LetterController],
-  providers: [LetterService],
+  providers: [LetterService, JwtService],
 })
 export class LetterModule {}

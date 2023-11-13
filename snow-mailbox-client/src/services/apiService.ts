@@ -44,6 +44,12 @@ const getLetter = (id: any) => {
   return http.get(`/letter/${id}`);
 };
 
+const getCardCount = () => {
+  const headers = checkTocken();
+  console.log(headers);
+  return http.get(`/letter/card-counting`, { headers });
+};
+
 const checkTocken = () => {
   const token = localStorage.getItem("token");
   return { Authorization: `Bearer ${token}` };
@@ -60,6 +66,7 @@ const ApiService = {
   writeLetter,
   getCardByUser,
   getLetter,
+  getCardCount,
 };
 
 export default ApiService;
