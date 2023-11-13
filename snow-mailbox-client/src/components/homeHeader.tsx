@@ -20,6 +20,10 @@ const HeaderWrapper = styled.div`
   &.center {
     text-align: center;
   }
+
+  .font {
+    font-size: 15px;
+  }
 `;
 
 const SantaWrapper = styled.div`
@@ -49,7 +53,11 @@ const HomeHeader = ({ count, name, isMyMailbox }: any) => {
           <>
             Hello! {name} :)
             <br />
-            <b>{count}</b> letters received!
+            {count === 0 ? (
+              <div className="font">You haven't received any letters yet.</div>
+            ) : (
+              `${(<b>{count}</b>)} letters received!`
+            )}
           </>
         ) : (
           <>

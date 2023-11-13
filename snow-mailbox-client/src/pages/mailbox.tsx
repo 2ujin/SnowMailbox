@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import gift from "../assets/hand_gift.png";
 import Button from "../components/button";
+import MailboxImg from "../components/mailbox";
 import ApiService from "../services/apiService";
 import { IMailbox } from "../types/Users";
 
@@ -112,9 +113,20 @@ const ButtonWrapper = styled.div`
 `;
 
 const DecorationImg = styled.img`
-  width: 70px;
+  width: 50px;
   position: absolute;
-  top: 30px;
+  top: 55px;
+  left: 54%;
+  transform: translateX(-50%);
+  z-index: 999;
+`;
+
+const MailboxName = styled.div`
+  color: white;
+  font-family: "EF_jejudoldam";
+  font-size: 16px;
+  position: absolute;
+  top: 25px;
   left: 54%;
   transform: translateX(-50%);
   z-index: 999;
@@ -171,17 +183,17 @@ const Mailbox = () => {
     "sock",
   ];
 
-  const [inputValue, setInputValue] = useState("");
+  const [name, setName] = useState("");
   const [selectedColor, setSelectedState] = useState(color_list[0]);
   const [selectedDeco, setDecoState] = useState(deco_list[0]);
 
   const handleSubmit = async () => {
-    if (!inputValue) {
+    if (!name) {
       alert("Please fill name!");
     }
 
     const create: IMailbox = {
-      name: inputValue,
+      name: name,
       mailbox_color: selectedColor,
       mailbox_decorations: selectedDeco,
     };
@@ -206,8 +218,8 @@ const Mailbox = () => {
           <input
             maxLength={10}
             type="text"
-            value={inputValue}
-            onChange={(event) => setInputValue(event.target.value)}
+            value={name}
+            onChange={(event) => setName(event.target.value)}
           />
         </ItemWrapper>
 
@@ -241,10 +253,7 @@ const Mailbox = () => {
         </ItemWrapper>
 
         <MailboxWrapper>
-          <DecorationImg
-            src={require(`../assets/decorations/${selectedDeco}.png`)}
-          />
-          <MailboxSvg className="name" color={selectedColor} />
+          <MailboxImg deco={selectedDeco} color={selectedColor} name={name} />
         </MailboxWrapper>
 
         <ButtonWrapper>

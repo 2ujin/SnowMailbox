@@ -8,6 +8,7 @@ import ApiService from "../services/apiService";
 import { useState, useEffect } from "react";
 import { IMailbox, IUsers } from "../types/Users";
 import moment from "moment";
+import MailboxImg from "../components/mailbox";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -176,14 +177,24 @@ const Home = () => {
           <Dday>
             <img src={calendar} /> D - {dday}
           </Dday>
-          {data.mailbox_decorations ? (
+          {/* {data.mailbox_decorations ? (
             <DecorationImg
               src={require(`../assets/decorations/${data.mailbox_decorations}.png`)}
             />
           ) : (
             <></>
           )}
-          <MailboxSvg className="name" color={data.mailbox_color} />
+          <MailboxSvg className="name" color={data.mailbox_color} /> */}
+          {data.mailbox_decorations ? (
+            <MailboxImg
+              is_style={true}
+              deco={data.mailbox_decorations}
+              color={data.mailbox_color}
+              name={"jin"}
+            />
+          ) : (
+            <></>
+          )}
 
           {/* <Mailbox  src={mailbox} /> */}
           <ButtonWrapper>
