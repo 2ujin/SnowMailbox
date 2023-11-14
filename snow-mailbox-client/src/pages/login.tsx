@@ -47,11 +47,13 @@ const Login = () => {
   const navigate = useNavigate();
 
   const getMailboxbyId = async () => {
-    const is_mailbox = await apiService.getMailbox();
-    setData(is_mailbox);
-    if (is_mailbox.data) {
-      navigate(`/${is_mailbox.data._id}`);
-    }
+    try {
+      const is_mailbox = await apiService.getMailbox();
+      setData(is_mailbox);
+      if (is_mailbox?.data) {
+        navigate(`/${is_mailbox.data._id}`);
+      }
+    } catch (e) {}
   };
 
   useEffect(() => {

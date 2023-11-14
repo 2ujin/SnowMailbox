@@ -68,13 +68,16 @@ const Letters = () => {
         <Gift src={gift} />
         {cards.length > 0 ? (
           cards.map((card: ICard) => (
-            <CardImg
-              onClick={() => navigate(`/detail/${card._id}`)}
-              color={card.card_color}
-              deco={card.card_deco}
-              text={card.card_text}
-              sticker={card.card_sticker}
-            />
+            <>
+              <CardImg
+                onClick={() => navigate(`/detail/${card._id}`)}
+                color={card.card_color}
+                deco={card.card_deco}
+                text={card.card_text}
+                sticker={card.card_sticker}
+              />
+              <br />
+            </>
           ))
         ) : (
           <>You haven't received any letters yet</>
