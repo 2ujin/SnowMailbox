@@ -28,3 +28,15 @@ npm run start
 ## Notes
 * In order to implement Google login, you must register the email to be tested in Google API. and Add REACT_APP_CLIENT_KEY (this is google client key)
 * In server, You need to connect mongoDB and add .env file
+
+`client .env`
+```typescript
+REACT_APP_CLIENT_KEY=YOUR_GOOGLE_CLIENT_KEY
+```
+
+`server .env`
+```typescript
+MONGODB_URI=YOUR_MONGO_URI
+SECRET_KEY=YOUR_SECRET_KEY (You just have to decide)
+```
+
