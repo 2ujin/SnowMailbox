@@ -23,3 +23,8 @@ npm run start
 ### Backend
 * Nest JS
 * mongoDB
+
+
+## Notes
+* In order to implement Google login, you must register the email to be tested in Google API. and Add REACT_APP_CLIENT_KEY (this is google client key)
+* In server, You need to connect mongoDB and add .env file
