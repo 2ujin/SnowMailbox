@@ -26,7 +26,7 @@ npm run start
 
 
 ## Notes
-* In order to implement Google login, you must register the email to be tested in Google API. and Add REACT_APP_CLIENT_KEY (this is google client key)
+* In order to implement Google login, you must register the email to be tested in Google API. and Add REACT_APP_CLIENT_KEY (this is google client key) [ref](https://console.cloud.google.com/welcome?project=analog-vault-305809)
 * In server, You need to connect mongoDB and add .env file
 
 `client .env`
